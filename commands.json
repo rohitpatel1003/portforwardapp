@@ -1,0 +1,82 @@
+[
+  {
+    "category": "DRUID",
+    "services": [
+      {
+        "id": "bd_qa_druid",
+        "name": "BD QA DRUID",
+        "port": 8088,
+        "command": "FOR /L %G IN () DO kubectl port-forward Service/druid-sm-druid-cluster-routers -n sm-druid 8088:8088 --kubeconfig C:\\Users\\rohit\\Documents\\config_files_kube\\config_client || (echo Restarting... & timeout /t 5)"
+      },
+      {
+        "id": "cloud_qa_druid",
+        "name": "CLOUD QA DRUID",
+        "port": 8089,
+        "command": "FOR /L %G IN () DO kubectl port-forward Service/druid-sm-druid-cluster-routers -n sm-druid 8089:8088 --kubeconfig C:\\Users\\rohit\\Documents\\config_files_kube\\qa_druid  || (echo Restarting... & timeout /t 5)  "
+      },
+      {
+        "id": " p_druid",
+        "name": "P DRUID",
+        "port": 8090,
+        "command": "FOR /L %G IN () DO kubectl port-forward Service/druid-sm-druid-cluster-routers -n sm-druid 8090:8088 --kubeconfig C:\\Users\\rohit\\Documents\\config_files_kube\\p_config  || (echo Restarting... & timeout /t 5)"
+      },
+      {
+        "id": "cloud_dev_druid",
+        "name": "CLOUD DEV DRUID",
+        "port": 8091,
+        "command": "FOR /L %G IN () DO kubectl port-forward Service/druid-sm-druid-cluster-routers -n sm-druid 8091:8088 --kubeconfig C:\\Users\\rohit\\Documents\\config_files_kube\\dev_druid || (echo Restarting... & timeout /t 5)"
+      },
+      {
+        "id": "bd_prod_druid",
+        "name": "BD PROD DRUID",
+        "port": 8092,
+        "command": "FOR /L %G IN () DO kubectl port-forward Service/druid-sm-druid-cluster-routers -n sm-druid 8092:8088 --kubeconfig C:\\Users\\rohit\\Documents\\config_files_kube\\bdprod  || (echo Restarting... & timeout /t 5)"
+      }
+    ]
+  },
+  {
+    "category": "Postgres",
+    "services": [
+      {
+        "id": "qa_postgres",
+        "name": "qa Postgres",
+        "port": 5433,
+        "command": "FOR /L %G IN () DO kubectl port-forward service/sm-main-kubegres 5433:5432 -n sm-kubegres --kubeconfig \"C:\\Users\\rohit\\Documents\\config_files_kube\\bdqa_postgres\"  || (echo Restarting... & timeout /t 5)"
+      },
+      {
+        "id": "dev_postgres",
+        "name": "Dev Postgres",
+        "port": 5434,
+        "command": "FOR /L %G IN () DO kubectl port-forward service/sm-main-kubegres 5434:5432 -n sm-kubegres --kubeconfig \"C:\\Users\\rohit\\Documents\\config_files_kube\\dev_postgres\" || (echo Restarting... & timeout /t 5)"
+      },
+      {
+        "id": "qa_postgres",
+        "name": "QA Postgres",
+        "port": 5435,
+        "command": "FOR /L %G IN () DO kubectl port-forward service/sm-main-kubegres 5435:5432 -n sm-kubegres --kubeconfig \"C:\\Users\\rohit\\Documents\\config_files_kube\\qa_postgres\" || (echo Restarting... & timeout /t 5)"
+      }
+    ]
+  },
+  {
+    "category": "Node Red",
+    "services": [
+      {
+        "id": "mebdqa_nodered",
+        "name": "MEBDQA NODERED",
+        "port": 1884,
+        "command": "FOR /L %G IN () DO kubectl port-forward kafka-consumer -n if 1884:80 --kubeconfig C:\\Users\\rohit\\config_files_kube\\config_mebdqa  || (echo Restarting... & timeout /t 5)  "
+      }
+    ]
+  },
+  {
+    "category": "Superset",
+    "services": [
+      {
+        "id": "superset_local",
+        "name": "SUPERSET LOCAL",
+        "port": 8095,
+        "command": "FOR /L %G IN () DO kubectl port-forward service/superset 8095:8088 -n superset  || (echo Restarting... & timeout /t 5)  "
+      }
+    ]
+  }
+]
